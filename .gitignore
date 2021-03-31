@@ -1,2 +1,4 @@
-WpfApplication1/bin
-WpfApplication1/obj
+RandomImageViewer/bin
+RandomImageViewer/obj
+RandomImageViewer/*.user
+.vs
