@@ -20,7 +20,7 @@ namespace WpfApplication1
         const string TRASH_DIR = @".\trash\";
         private string CurrDirectory = Environment.CurrentDirectory + @"\images";
         private int ImageIndex = 0;
-        private double GridOpacity;
+        const double GridOpacity = 1;
         const double GridOpacityInactive = .3;
         private bool IsRunning = true;
         private List<string> Files = new List<string>();
@@ -39,14 +39,13 @@ namespace WpfApplication1
                 ClearAndPopulateFiles();
                 if ( Files.Count() > 0 )
                 {
-                    GridOpacity = ButtonGrid.Opacity;
                     ButtonGrid.Opacity = GridOpacityInactive;
                     ToggleButtons( true );
                     IndexRandomly( false );
                     DisplayImage();
                 }
             }
-            catch ( Exception E )
+            catch ( Exception )
             {
 
             }
@@ -180,14 +179,17 @@ namespace WpfApplication1
                 Directory.CreateDirectory(TRASH_DIR);
             }
 
+            int indexCache = ImageIndex;
+
+            DisplayImage();
+
             lock (Mutex)
             {
-                string currentFile = Files[ImageIndex];
+                string currentFile = Files[indexCache];
                 File.Move(currentFile, TRASH_DIR + Path.GetFileName(currentFile));
                 ClearAndPopulateFiles();
             }
 
-            DisplayImage();
             ToggleButtons(true);
         }
         
@@ -253,7 +255,6 @@ namespace WpfApplication1
         {
             ButtonLeft.IsEnabled = state;
             ButtonPrevious.IsEnabled = state;
-            ButtonOpen.IsEnabled = state;
             ButtonDelete.IsEnabled = state;
             ButtonRandom.IsEnabled = state;
             ButtonRight.IsEnabled = state;
@@ -275,25 +276,14 @@ namespace WpfApplication1
 
                 if (Files.Count() > 0)
                 {
-                    using (Image imageFromFile = Image.FromFile(Files[ImageIndex]))
-                    {
-                        using (Bitmap bitmap1 = new Bitmap(imageFromFile))
-                        {
-                            try
-                            {
-                                Title = Path.GetFileName(Files[ImageIndex]);
-                                Dispatcher.Invoke(() =>
-                                {
-                                    imageLeft.Source = BitmapToImageSource(bitmap1);
-                                });
-                            }
-                            catch
-                            {
-                                tryAgain = true;
-                                ImageIndex++;
-                            }
-                        }
-                    }
+                    Title = Path.GetFileName(Files[ImageIndex]);
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.UriSource = new Uri(Files[ImageIndex]);
+                    image.EndInit();
+                    imageLeft.Source = image;
+
                 }
 
                 if (tryAgain)
@@ -306,23 +296,5 @@ namespace WpfApplication1
                 }
             }
         }
-
-        BitmapImage BitmapToImageSource(Bitmap bitmap)
-        {
-            using (MemoryStream memory = new MemoryStream())
-            {
-                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
-                memory.Position = 0;
-                BitmapImage bitmapimage = new BitmapImage();
-                bitmapimage.BeginInit();
-                bitmapimage.StreamSource = memory;
-                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapimage.EndInit();
-
-                return bitmapimage;
-            }
-        }
-
-
     }
 }
