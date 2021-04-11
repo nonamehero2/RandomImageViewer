@@ -5,17 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
-        Title="Image Viewer" Height="768" Width="1024" Closed="Window_Closed" MouseWheel="Window_MouseWheel">
+        Title="Image Viewer" Height="768" Width="1024" Closed="Window_Closed" MouseWheel="Window_MouseWheel"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True">
     <Grid Margin="0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
         <Image x:Name="imageLeft" Grid.RowSpan="2"  Grid.Row="0"/>
-        <Grid x:Name="ButtonGrid" Margin="0" Width="850" Grid.RowSpan="2" Grid.Row="1" Opacity="0.9" MouseEnter="ButtonGrid_MouseEnter" MouseLeave="ButtonGrid_MouseLeave">
+        <Grid x:Name="ButtonGrid" Width="850" Grid.RowSpan="2" Grid.Row="1" Opacity="0.9" MouseEnter="ButtonGrid_MouseEnter" MouseLeave="ButtonGrid_MouseLeave" HorizontalAlignment="Center" Background="#00000000">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.5*"/>
                 <ColumnDefinition/>
@@ -27,12 +29,12 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button x:Name="ButtonLeft"     Content="&lt;-"    Click="ButtonLeft_Click"     Grid.Column="0" Background="Gray" Foreground="White" Grid.RowSpan="2"/>
-            <Button x:Name="ButtonPrevious" Content="Previous" Click="ButtonPrevious_Click" Grid.Column="1" Background="Gray" Foreground="White" Grid.RowSpan="2"/>
-            <Button x:Name="ButtonOpen"     Content="Open"     Click="ButtonOpen_Click"     Grid.Column="2" Background="Gray" Foreground="White" Grid.Row="0"/>
-            <Button x:Name="ButtonDelete"   Content="Delete"   Click="ButtonDelete_Click"   Grid.Column="2" Background="Gray" Foreground="White" Grid.Row="1"/>
-            <Button x:Name="ButtonRandom"   Content="Random"   Click="ButtonRandom_Click"   Grid.Column="3" Background="Gray" Foreground="White" Grid.RowSpan="2"/>
-            <Button x:Name="ButtonRight"    Content="-&gt;"    Click="ButtonRight_Click"    Grid.Column="4" Background="Gray" Foreground="White" Grid.RowSpan="2" />
+            <Button x:Name="ButtonLeft"     Content="🠔"    Click="ButtonLeft_Click"     Grid.Column="0" Background="Gray" Foreground="White" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4" FontSize="40"/>
+            <Button x:Name="ButtonPrevious" Content="Previous" Click="ButtonPrevious_Click" Grid.Column="1" Background="Gray" Foreground="White" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4"/>
+            <Button x:Name="ButtonOpen"     Content="Open"     Click="ButtonOpen_Click"     Grid.Column="2" Background="Gray" Foreground="White" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4"/>
+            <Button x:Name="ButtonDelete"   Content="Delete"   Click="ButtonDelete_Click"   Grid.Column="2" Background="Gray" Foreground="White" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4"/>
+            <Button x:Name="ButtonRandom"   Content="Random"   Click="ButtonRandom_Click"   Grid.Column="3" Background="Gray" Foreground="White" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4"/>
+            <Button x:Name="ButtonRight"    Content="🠖"    Click="ButtonRight_Click"    Grid.Column="4" Background="Gray" Foreground="White" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4" FontSize="40" />
         </Grid>
     </Grid>
 </Window>
