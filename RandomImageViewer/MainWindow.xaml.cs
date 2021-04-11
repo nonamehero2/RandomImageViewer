@@ -9,7 +9,7 @@ using System.Threading;
 using System.Security.Cryptography;
 using Path = System.IO.Path;
 
-namespace WpfApplication1
+namespace RandomImageViewer
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
