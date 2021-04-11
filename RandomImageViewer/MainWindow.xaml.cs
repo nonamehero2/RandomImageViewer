@@ -18,7 +18,7 @@ namespace RandomImageViewer
     {
         const string SEARCH_OPTIONS = "*.jpg,*.jpeg,*.png,*.gif,*.tiff,*.bmp,*.svg";
         const string TRASH_DIR = @".\trash\";
-        private string CurrDirectory = Environment.CurrentDirectory + @"\images";
+        private string CurrDirectory = Path.GetFullPath( @".\images");
         private int ImageIndex = 0;
         const double GridOpacity = 1;
         const double GridOpacityInactive = .3;
@@ -34,6 +34,7 @@ namespace RandomImageViewer
 
             ToggleButtons( false );
 
+            // Perform Setup
             try
             {
                 ClearAndPopulateFiles();
@@ -45,9 +46,10 @@ namespace RandomImageViewer
                     DisplayImage();
                 }
             }
-            catch ( Exception )
+            catch ( Exception e )
             {
-
+                MessageBox.Show(e.Message);
+                Environment.Exit(1);
             }
 
             MainThread = new Thread( new ThreadStart( ThreadMethod ) );
@@ -68,9 +70,10 @@ namespace RandomImageViewer
                 }
 
             }
-            catch ( Exception )
+            catch (Exception e)
             {
-                // DO NOTHING
+                MessageBox.Show(e.Message);
+                Environment.Exit(1);
             }
         }
 
@@ -147,7 +150,7 @@ namespace RandomImageViewer
                     {
                         lock ( Mutex )
                         {
-                            CurrDirectory = fbd.SelectedPath;
+                            CurrDirectory = Path.GetFullPath(fbd.SelectedPath);
                             ClearAndPopulateFiles();
                         }
 
@@ -245,9 +248,12 @@ namespace RandomImageViewer
         {
             Files.Clear();
 
-            foreach (string imageFile in Directory.GetFiles(CurrDirectory, "*.*", SearchOption.TopDirectoryOnly).Where(s => SEARCH_OPTIONS.Contains(System.IO.Path.GetExtension(s).ToLower())))
+            if (Directory.Exists(CurrDirectory))
             {
-                Files.Add(imageFile);
+                foreach (string imageFile in Directory.GetFiles(CurrDirectory, "*.*", SearchOption.TopDirectoryOnly).Where(s => SEARCH_OPTIONS.Contains(System.IO.Path.GetExtension(s).ToLower())))
+                {
+                    Files.Add(imageFile);
+                }
             }
         }
 
@@ -283,7 +289,6 @@ namespace RandomImageViewer
                     image.UriSource = new Uri(Files[ImageIndex]);
                     image.EndInit();
                     imageLeft.Source = image;
-
                 }
 
                 if (tryAgain)
