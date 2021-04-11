@@ -181,14 +181,14 @@ namespace RandomImageViewer
 
             int indexCache = ImageIndex;
 
-            DisplayImage();
-
             lock (Mutex)
             {
                 string currentFile = Files[indexCache];
                 File.Move(currentFile, TRASH_DIR + Path.GetFileName(currentFile));
                 ClearAndPopulateFiles();
             }
+
+            DisplayImage();
 
             ToggleButtons(true);
         }
