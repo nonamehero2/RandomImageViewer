@@ -34,6 +34,16 @@ namespace RandomImageViewer
 
             ToggleButtons( false );
 
+            // Get path if its passed to program
+            if (Environment.GetCommandLineArgs().Length == 2)
+            {
+                string[] args = Environment.GetCommandLineArgs();
+                if (Directory.Exists(args[1]))
+                {
+                    CurrDirectory = Path.GetFullPath(args[1]);
+                }
+            }
+
             // Perform Setup
             try
             {
