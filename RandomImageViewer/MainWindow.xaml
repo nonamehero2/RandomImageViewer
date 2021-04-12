@@ -27,12 +27,12 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button x:Name="ButtonLeft"     Content="&lt;-"    Click="ButtonLeft_Click"     Grid.Column="0" Background="Gray" Foreground="White" Grid.RowSpan="2"/>
+            <Button x:Name="ButtonLeft"     Content="🠔"    Click="ButtonLeft_Click"     Grid.Column="0" Background="Gray" Foreground="White" Grid.RowSpan="2" FontSize="20"/>
             <Button x:Name="ButtonPrevious" Content="Previous" Click="ButtonPrevious_Click" Grid.Column="1" Background="Gray" Foreground="White" Grid.RowSpan="2"/>
             <Button x:Name="ButtonOpen"     Content="Open"     Click="ButtonOpen_Click"     Grid.Column="2" Background="Gray" Foreground="White" Grid.Row="0"/>
             <Button x:Name="ButtonDelete"   Content="Delete"   Click="ButtonDelete_Click"   Grid.Column="2" Background="Gray" Foreground="White" Grid.Row="1"/>
             <Button x:Name="ButtonRandom"   Content="Random"   Click="ButtonRandom_Click"   Grid.Column="3" Background="Gray" Foreground="White" Grid.RowSpan="2"/>
-            <Button x:Name="ButtonRight"    Content="-&gt;"    Click="ButtonRight_Click"    Grid.Column="4" Background="Gray" Foreground="White" Grid.RowSpan="2" />
+            <Button x:Name="ButtonRight"    Content="🠖"    Click="ButtonRight_Click"    Grid.Column="4" Background="Gray" Foreground="White" Grid.RowSpan="2" FontSize="20" />
         </Grid>
     </Grid>
 </Window>
