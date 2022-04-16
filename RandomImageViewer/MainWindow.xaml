@@ -15,6 +15,7 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Image x:Name="imageLeft" Grid.RowSpan="2"  Grid.Row="0"/>
+        <MediaElement  x:Name="gifImageleft" Grid.RowSpan="2"  Grid.Row="0" Source="{Binding ElementName=lst, Path=SelectedItem}" Stretch="None"/>
         <Grid x:Name="ButtonGrid" Margin="0" Width="850" Grid.RowSpan="2" Grid.Row="1" Opacity="0.9" MouseEnter="ButtonGrid_MouseEnter" MouseLeave="ButtonGrid_MouseLeave">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.5*"/>

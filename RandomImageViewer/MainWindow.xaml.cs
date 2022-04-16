@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Threading;
 using System.Security.Cryptography;
 using Path = System.IO.Path;
+using System.Windows.Controls;
 
 namespace RandomImageViewer
 {
@@ -293,12 +294,34 @@ namespace RandomImageViewer
                 if (Files.Count() > 0)
                 {
                     Title = Path.GetFileName(Files[ImageIndex]);
-                    BitmapImage image = new BitmapImage();
-                    image.BeginInit();
-                    image.CacheOption = BitmapCacheOption.OnLoad;
-                    image.UriSource = new Uri(Files[ImageIndex]);
-                    image.EndInit();
-                    imageLeft.Source = image;
+                    
+                    if (Files[ImageIndex].EndsWith(".gif"))
+                    {
+                        imageLeft.IsEnabled = false;
+
+                        imageLeft.Source = null;
+                        // MediaElement mediaElement = new MediaElement();
+                        // mediaElement.Source = new Uri(Files[ImageIndex]);
+                        gifImageleft.Source = new Uri(Files[ImageIndex]);
+
+                        gifImageleft.IsEnabled = true;
+                    }
+                    else
+                    {
+                        gifImageleft.IsEnabled = false;
+                        gifImageleft.Source = null;
+
+                        BitmapImage image = new BitmapImage();
+                        image.BeginInit();
+                        image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.UriSource = new Uri(Files[ImageIndex]);
+                        image.EndInit();
+                        imageLeft.Source = image;
+
+                        imageLeft.IsEnabled = true;
+                    }
+
+
                 }
 
                 if (tryAgain)
